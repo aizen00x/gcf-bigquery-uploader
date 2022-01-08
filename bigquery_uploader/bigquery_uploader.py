@@ -21,7 +21,7 @@ class BigQueryUploader:
             transformed_data = DataTransformator.transform(json.loads(data))
             logging.info(f"Data was successfully transformed: {transformed_data}")
 
-            timeout = int(os.environ.get("UPLOAD_TIMEOUT", "60"))
+            timeout = int(os.environ.get("INSERT_TIMEOUT", "60"))
             self.__table.insert(transformed_data, timeout)
             logging.info(f"Transformed data was successfully uploaded to the BigQuery")
         except DataIsNotPresentError as ex:
