@@ -6,8 +6,10 @@ class EventPayloadExtractor:
     @staticmethod
     def extract(event) -> str:
         """
-        Extract data from event payload
-        :return: decoded data as a string
+        Extract data from event
+        :param dict event: Event which is provided by Google Cloud when function is invoked
+        :return: Extracted and decoded data
+        :raises: DataIsNotPresentError
         """
 
         if "data" in event:

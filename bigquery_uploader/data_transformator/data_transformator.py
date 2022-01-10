@@ -1,7 +1,18 @@
 class DataTransformator:
     @staticmethod
     def transform(data: list) -> list:
-        def is_valid(item: dict):
+        """
+        Clean and process data
+        :param list data: list of entries with data about country's covid situation
+        :return: list with transformed data
+        """
+        def is_valid(item: dict) -> bool:
+            """
+            Check if item has lastUpdate field set and that recovered amount is smaller than
+            confirmed.
+            :param dict item: entry with information about country's situation
+            :returns: boolean value that represents validity of provided entry
+            """
             return item["lastUpdate"] and item["recovered"] <= item["confirmed"]
 
         result = []

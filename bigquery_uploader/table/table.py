@@ -5,6 +5,9 @@ from .insert_timeout_error import InsertTimeoutError
 
 
 class Table:
+    """
+    Establishes connection with BigQuery and is responsible for interaction with a specific table
+    """
     def __init__(self,
                  dataset: str = os.environ.get("DATASET", ""),
                  table: str = os.environ.get("TABLE", "")):
@@ -20,7 +23,14 @@ class Table:
         self.dataset = dataset
         self.table = table
 
-    def insert(self, data: list, timeout: int = 60):
+    def insert(self, data: list, timeout: int = 60) -> None:
+        """
+        Insert list of entries to table
+        :param list data: List of entries to insert in the table
+        :param int timeout: Timeout for insertion. Default is 60 seconds
+        :return: None
+        :raises: InsertTimeoutError
+        """
         try:
             self.__bq.insert_rows_json(
                 f"{self.dataset}.{self.table}",
