@@ -20,8 +20,8 @@ class Table:
                             "'Table' environment variable")
 
         self.__bq = bigquery.Client()
-        self.dataset = dataset
-        self.table = table
+        self.__dataset = dataset
+        self.__table = table
 
     def insert(self, data: list, timeout: int = 60) -> None:
         """
@@ -33,7 +33,7 @@ class Table:
         """
         try:
             self.__bq.insert_rows_json(
-                f"{self.dataset}.{self.table}",
+                f"{self.__dataset}.{self.__table}",
                 data,
                 timeout=timeout
             )
